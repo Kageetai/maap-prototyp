@@ -4,18 +4,24 @@
 import rp from 'request-promise';
 import _ from 'lodash';
 var existingLocations, city, limit, accesstoken, google, createdBy;
+var baseUrl = 'https://graph.facebook.com/v2.5/';
 
 var FacebookImport = {
   init: function (user, locations, options) {
     return new Promise((resolve, reject) => {
-      accesstoken = 'CAACEdEose0cBALgUwsXdO7dZBMNlZBBX9gji7tZAVBZAc822HsFrVwVoD06eZBBbRGkSQmwfHZBQaLqbAzoCZAfAiOXOhpU6TB20pzufX7zRMw9b9mLMBMTu34NE687bwQ6nNTZBMnBZBZAIESNZBEWHtagwxiItho6LvHxZAx7vNrTLNNItZACMdtNby0kLZBKMwldsS8lezfu1bLdQZDZD';
+      // request an access token for the app's test user
+      rp.get(encodeURI(baseUrl + options.clientID + '/accounts/test-users?access_token=' +options.clientID + '|' + options.clientSecret))
+        .then((res) => {
+          accesstoken = JSON.parse(res).data[0].access_token;
+
+          resolve();
+        });
+
       google = options.googleApi;
       existingLocations = locations;
       createdBy = user;
       city = options.city;
       limit = options.limit;
-
-      resolve()
     });
   },
   run: function () {
@@ -32,10 +38,11 @@ var FacebookImport = {
           'maybe_count'],
         since = (new Date().getTime() / 1000).toFixed();
 
-      rp.get(encodeURI('https://graph.facebook.com/v2.5/search?q=' + city + '&type=event&fields=' + fields + '&limit=' + limit + '&access_token=' + accesstoken))
+      // query for events via Graph API
+      rp.get(encodeURI(baseUrl+'search?q=' + city + '&type=event&fields=' + fields + '&limit=' + limit + '&access_token=' + accesstoken))
         .then((res) => {
-          console.log("res received");
           var events = JSON.parse(res).data;
+          //TODO check for exisiting events
           for (var i = 0; i < events.length; i++) {
             if (events[i].place == undefined || events[i].place.location == undefined) {
               continue; // skip the event if there is no place or location
