@@ -7,7 +7,7 @@ var CategorySchema = new mongoose.Schema({
   info: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  createdBy: { type: Schema.ObjectId, ref: 'User' },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
   active: Boolean
 });
 

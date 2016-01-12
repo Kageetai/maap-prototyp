@@ -21,7 +21,7 @@ var LocationSchema = new mongoose.Schema({
   images: [{ type: String, unique: true }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  createdBy: { type: Schema.ObjectId, ref: 'User', required: true },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   active: Boolean
 });
 

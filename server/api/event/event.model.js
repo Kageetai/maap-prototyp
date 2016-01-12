@@ -9,11 +9,11 @@ var EventSchema = new mongoose.Schema({
   start_time: Date,
   end_time: Date,
   pictures: [{ type: String, unique: true }],
-  location: { type: Schema.ObjectId, ref: 'Location' },
-  category: { type: Schema.ObjectId, ref: 'Category' },
+  location: { type: mongoose.Schema.ObjectId, ref: 'Location' },
+  category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  createdBy: { type: Schema.ObjectId, ref: 'User', required: true },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   active: { type: Boolean, default: false }
 });
 
