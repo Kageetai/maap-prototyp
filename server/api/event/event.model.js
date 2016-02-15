@@ -3,16 +3,17 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var EventSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   description: String,
-  url: String,
-  start_time: Date,
-  end_time: Date,
-  external_id: { type: String, required: true },
+  url: { type: String, required: true },
+  start: { type: Date, required: true },
+  end: Date,
+  external_id: { type: String, required: true, unique: true },
   pictures: [{ type: String, unique: true }],
-  location: { type: mongoose.Schema.ObjectId, ref: 'Location' },
+  location: { type: mongoose.Schema.ObjectId, ref: 'Location', required: true },
   category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
-  createdAt: { type: Date, default: Date.now },
+  attending: Number,
+  createdAt: { type: Date, default: Date.now, required: true },
   updatedAt: { type: Date, default: Date.now },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   active: { type: Boolean, default: false }

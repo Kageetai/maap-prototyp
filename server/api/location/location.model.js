@@ -9,14 +9,14 @@ var LocationSchema = new mongoose.Schema({
   address: {
     country: String,
     city: String,
-    Street: String,
+    street: String,
     zip: String
   },
   coordinates: {
-    lng: { type: Number, required: true },
-    lat: { type: Number, required: true }
+    lat: { type: Number, required: true },
+    lng: { type: Number, required: true }
   },
-  external_id: { type: String, required: true },
+  external_id: { type: String, required: true, unique: true },
   provider: { type: String, required: true },
   images: [{ type: String, unique: true }],
   createdAt: { type: Date, default: Date.now },
