@@ -62,6 +62,7 @@ function runImports() {
         //  .catch((err) => {
         //    console.error(err);
         //  });
+        mongoose.disconnect();
       })
       .catch((err) => {
         console.error(err);
