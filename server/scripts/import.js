@@ -48,28 +48,25 @@ if (config.seedDB) {
 function runImports() {
   var importer;
 
-  Location.find({}, function (locations) {
-    for (var i = 0; i < importers.length; i++) {
-      console.log('Running importer: ' + importers[i].name);
+  for (var i = 0; i < importers.length; i++) {
+    console.log('Running importer: ' + importers[i].name);
 
-      importer = new require(importers[i].module);
-      importer.init(admin._id, locations, importers[i].options)
-        .then(importer.run)
-        .then(function (events) {
-          console.log(events);
-          //Event.find({}).remove(function () {
-          //  Event.create(events, function (err, created) {
-          //    if (err) {
-          //      console.log(err);
-          //    } else {
-          //      console.log("  imported " + created.length + " events");
-          //    }
-          //  });
-          //});
-        });
-    }
-  });
-
+    importer = new require(importers[i].module);
+    importer.init(admin._id, Event, Location, importers[i].options)
+      .then(importer.run)
+      .then((events) => {
+        //Event.createAsync(events)
+        //  .then((events) => {
+        //    console.log("Events created or updated: " + events.length);
+        //  })
+        //  .catch((err) => {
+        //    console.error(err);
+        //  });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }
 
 //exports = module.exports = app;
