@@ -55,17 +55,16 @@ function runImports() {
     importer.init(admin._id, Event, Location, importers[i].options)
       .then(importer.run)
       .then((events) => {
-        //Event.createAsync(events)
-        //  .then((events) => {
-        //    console.log("Events created or updated: " + events.length);
-        //  })
-        //  .catch((err) => {
-        //    console.error(err);
-        //  });
-        mongoose.disconnect();
+        //TODO check for existing events
+        Event.createAsync(events)
+          .then((events) => {
+            console.log('  Events created: ' + events.length);
+            mongoose.disconnect();
+          });
       })
       .catch((err) => {
         console.error(err);
+        mongoose.disconnect();
       });
   }
 }
