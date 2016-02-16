@@ -46,31 +46,34 @@ if (config.seedDB) {
 }
 
 function runImports() {
-  var importer;
-
-  for (var i = 0; i < importers.length; i++) {
-    if (!importers[i].active) {
-      console.log('Importer inactive: ' + importers[i].name);
-      continue;
+  var promises = importers.filter((imp) => {
+    if (!imp.active) {
+      console.log(imp.name + ' Importer inactive');
+      return false;
     }
-    console.log('Importer running: ' + importers[i].name);
+    return true;
+  }).map((imp) => {
+    console.log(imp.name + ' Importer running');
 
-    importer = new require(importers[i].module);
-    importer.init(admin._id, Event, Location, importers[i].options)
+    var importer = new require(imp.module);
+    return importer.init(admin._id, Event, Location, imp.options)
       .then(importer.run)
       .then((events) => {
         //TODO check for existing events
-        Event.createAsync(events)
+        return Event.createAsync(events)
           .then((events) => {
-            console.log('  Events created: ' + events.length);
-            mongoose.disconnect();
+            console.log(imp.name + ' Events created: ' + events.length);
           });
       })
       .catch((err) => {
         console.error(err);
-        mongoose.disconnect();
       });
-  }
+  });
+
+  Promise.all(promises).then(() => {
+    mongoose.disconnect();
+    console.log('Importers finished');
+  })
 }
 
 //exports = module.exports = app;
