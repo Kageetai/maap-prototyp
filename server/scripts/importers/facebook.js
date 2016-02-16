@@ -30,23 +30,27 @@ var FacebookImport = {
         'cover.fields(id,source)',
         'picture.type(large)',
         'attending_count',
+        'description',
         'maybe_count'],
       since = (new Date().getTime() / 1000).toFixed();
 
     // query for events via Graph API
     return rp.get(encodeURI(baseUrl + 'search?q=' + city + '&type=event&fields=' + fields + '&limit=' + limit + '&access_token=' + accesstoken))
       .then((res) => {
-        var events = JSON.parse(res).data;
+        // parse the JSON from FB and filter out events without a proper location immediately
+        var events = JSON.parse(res).data.filter((e) => {
+          return _.has(e, 'place') && _.has(e, 'place.location') && _.has(e, 'place.location.latitude');
+        });
 
-        var promises = events.map((event, index) => {
-          if (!_.has(event, "place") || !_.has(event, "place.location")) {
-            events.splice(index, 1);
-            return; // skip the event if there is no place or location
-          }
+        var promises = events.map((event) => {
+          //if (!_.has(event, 'place') || !_.has(event, 'place.location') || !_.has(event, 'place.location.latitude')) {
+          //  events.splice(index, 1);
+          //  return; // skip the event if there is no place or location
+          //}
 
           event.external_id = event.id;
           event.start = event.start_time;
-          event.end = event.end_time;
+          event.end = (event.end_time) ? event.end_time : null;
           event.createdBy = createdBy;
           event.url = 'http://www.facebook.com/events/' + event.id;
           event.pictures = [];
