@@ -27,6 +27,8 @@ var FacebookImport = {
         'name',
         'start_time',
         'end_time',
+        //'category',
+        'ticket_uri',
         'cover.fields(id,source)',
         'picture.type(large)',
         'attending_count',

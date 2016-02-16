@@ -49,7 +49,11 @@ function runImports() {
   var importer;
 
   for (var i = 0; i < importers.length; i++) {
-    console.log('Running importer: ' + importers[i].name);
+    if (!importers[i].active) {
+      console.log('Importer inactive: ' + importers[i].name);
+      continue;
+    }
+    console.log('Importer running: ' + importers[i].name);
 
     importer = new require(importers[i].module);
     importer.init(admin._id, Event, Location, importers[i].options)

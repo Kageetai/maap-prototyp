@@ -9,6 +9,7 @@ var EventSchema = new mongoose.Schema({
   start: { type: Date, required: true },
   end: Date,
   external_id: { type: String, required: true, unique: true },
+  ticket_uri: String,
   pictures: [{ type: String, unique: true }],
   location: { type: mongoose.Schema.ObjectId, ref: 'Location', required: true },
   category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
