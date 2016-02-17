@@ -61,14 +61,18 @@ function handleError(res, statusCode) {
 
 // Gets a list of Events
 export function index(req, res) {
-  Event.findAsync()
+  Event.find()
+    .populate('location')
+    .execAsync()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a single Event from the DB
 export function show(req, res) {
-  Event.findByIdAsync(req.params.id)
+  Event.findById(req.params.id)
+    .populate('location')
+    .execAsync()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));

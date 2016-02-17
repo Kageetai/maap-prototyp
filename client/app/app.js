@@ -9,11 +9,19 @@ angular.module('maapApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'validation.match'
+  'validation.match',
+  'uiGmapgoogle-maps'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
+  })
+  .config(function (uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+      key: 'AIzaSyDxHmFqesCdTNc2e6Q45364edVZgc847qs',
+      v: '3.20', //defaults to latest 3.X anyhow
+      libraries: 'geometry,visualization'
+    });
   });
