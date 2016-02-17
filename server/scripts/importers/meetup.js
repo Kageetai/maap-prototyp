@@ -57,7 +57,7 @@ var MeetupImport = {
           event.attending = event.yes_rsvp_count;
           event.pictures = [];
           if (event.photo_url) event.pictures.push(event.photo_url);
-          if (event.group_photo) event.pictures.push(event.group_photo);
+          if (event.group.group_photo) event.pictures.push(event.group.group_photo.photo_link);
 
           var location = {
             name: event.venue.name,
