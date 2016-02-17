@@ -73,6 +73,7 @@ function runImports() {
   Promise.all(promises).then(() => {
     mongoose.disconnect();
     console.log('Importers finished');
+    process.exit();
   })
 }
 

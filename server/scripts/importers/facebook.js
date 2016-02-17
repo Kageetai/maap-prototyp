@@ -3,11 +3,11 @@
 import rp from 'request-promise';
 import _ from 'lodash';
 
-var Event, Location, city, limit, accesstoken, google, createdBy;
-var baseUrl = 'https://graph.facebook.com/v2.5/';
+var Event, Location, baseUrl, city, limit, accesstoken, google, createdBy;
 
 var FacebookImport = {
   init: function (user, EventModel, LocationModel, options) {
+    baseUrl = options.baseUrl;
     google = options.googleApi;
     Event = EventModel;
     Location = LocationModel;
@@ -32,6 +32,7 @@ var FacebookImport = {
         'cover.fields(id,source)',
         'picture.type(large)',
         'attending_count',
+        'updated_time',
         'description',
         'maybe_count'],
       since = (new Date().getTime() / 1000).toFixed();
@@ -54,9 +55,10 @@ var FacebookImport = {
           event.start = event.start_time;
           event.end = (event.end_time) ? event.end_time : null;
           event.createdBy = createdBy;
+          event.createdAt = event.updatedAt = event.updated_time;
           event.url = 'http://www.facebook.com/events/' + event.id;
-          event.pictures = [];
           event.attending = event.attending_count;
+          event.pictures = [];
           if (event.cover) event.pictures.push(event.cover.source);
           if (event.picture) event.pictures.push(event.picture.data.url);
 
@@ -76,7 +78,7 @@ var FacebookImport = {
           };
 
           //TODO fetch info about location from FB before saving
-          return Location.findOneAndUpdateAsync({external_id: event.place.id}, location, {upsert: true, new: true})
+          return Location.findOneAndUpdateAsync({external_id: location.external_id}, location, {upsert: true, new: true})
             .then((loc) => {
               // just save the location ID to the event
               event.location = loc._id;
