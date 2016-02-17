@@ -46,6 +46,7 @@ var MeetupImport = {
         });
 
         var promises = events.map((event) => {
+          event.source = 'meetup';
           event.external_id = event.id;
           event.start = event.time;
           event.end = (event.duration) ? event.time + event.duration : null;

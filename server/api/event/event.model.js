@@ -14,6 +14,7 @@ var EventSchema = new mongoose.Schema({
   location: { type: mongoose.Schema.ObjectId, ref: 'Location', required: true },
   category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
   attending: Number,
+  source: String,
   createdAt: { type: Date, default: Date.now, required: true },
   updatedAt: { type: Date, default: Date.now },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },

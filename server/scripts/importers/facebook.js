@@ -51,6 +51,7 @@ var FacebookImport = {
           //  return; // skip the event if there is no place or location
           //}
 
+          event.source = 'facebook';
           event.external_id = event.id;
           event.start = event.start_time;
           event.end = (event.end_time) ? event.end_time : null;
