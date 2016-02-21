@@ -690,7 +690,7 @@ module.exports = function (grunt) {
       'postcss',
       'express:dev',
       'wait',
-      'open',
+      //'open',
       'watch'
     ]);
   });
