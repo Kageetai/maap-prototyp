@@ -3,6 +3,7 @@
 module.exports = [{
   name: 'Facebook',
   module: './importers/facebook',
+  color: '#3b5998',
   options: {
     baseUrl: 'https://graph.facebook.com/v2.5/',
     clientID: '1667337793508705',
@@ -15,6 +16,7 @@ module.exports = [{
 }, {
   name: 'Meetup',
   module: './importers/meetup',
+  color: '#E0393E',
   options: {
     baseUrl: 'https://api.meetup.com/2/',
     apiKey: 'f3e104f4605f104a3a5d196740376a',

@@ -64,7 +64,10 @@ function handleError(res, statusCode) {
 export function index(req, res) {
   var promise = new Promise((resolve, reject) => {
     resolve(importers.map((imp) => {
-      return imp.name;
+      return {
+        name: imp.name,
+        color: imp.color
+      };
     }));
   });
 
