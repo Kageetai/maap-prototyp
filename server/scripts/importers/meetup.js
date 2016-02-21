@@ -71,7 +71,9 @@ var MeetupImport = {
               city: (event.venue.city) ? event.venue.city : null,
               street: (event.venue.street) ? event.venue.address_1 : null,
               zip: (event.venue.zip) ? event.venue.zip : null
-            }
+            },
+            source: 'meetup',
+            createdBy: createdBy
           };
 
           return Location.findOneAndUpdateAsync({external_id: location.external_id}, location, {upsert: true, new: true})

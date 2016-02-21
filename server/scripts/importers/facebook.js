@@ -75,7 +75,9 @@ var FacebookImport = {
               city: (event.place.location.city) ? event.place.location.city : null,
               street: (event.place.location.street) ? event.place.location.street : null,
               zip: (event.place.location.zip) ? event.place.location.zip : null
-            }
+            },
+            source: 'meetup',
+            createdBy: createdBy
           };
 
           //TODO fetch info about location from FB before saving

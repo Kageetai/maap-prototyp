@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>{{event.event.name}}</h1>
+      <h1>{{event.event.name}} <small><a href="{{event.event.url}}" uib-tooltip="go to source"><i class="fa fa-external-link"></i></a></small></h1>
 
       <div ng-bind-html="event.event.description">{{event.event.description}}</div>
     </div>

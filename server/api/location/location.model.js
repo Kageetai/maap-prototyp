@@ -17,8 +17,8 @@ var LocationSchema = new mongoose.Schema({
     lng: { type: Number, required: true }
   },
   external_id: { type: String, required: true, unique: true },
-  provider: { type: String, required: true },
-  images: [{ type: String, unique: true }],
+  source: { type: String, required: true },
+  pictures: [{ type: String, unique: true }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
