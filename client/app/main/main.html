@@ -1,6 +1,6 @@
 <navbar></navbar>
 
-<ui-gmap-google-map center='main.map.center' zoom='main.map.zoom' options="main.map.options">
+<ui-gmap-google-map id="main-map" center='main.map.center' zoom='main.map.zoom' options="main.map.options">
   <ui-gmap-markers models="main.events"
                    idkey="'_id'"
                    coords="'location.coordinates'"
@@ -20,21 +20,23 @@
   </a>
 
   <div class="selEvent-info">
-    <strong>{{main.selEvent.start | date:fullDate}}</strong>
+    <p><strong>{{main.selEvent.start | date:fullDate}}</strong></p>
 
-    <p ng-bind-html="main.selEvent.description | cut:true:500:' ...'"></p>
-
-    <hr>
-
+    <p>
     <address>
       <strong>{{main.selEvent.location.name}}</strong><br>
       {{main.selEvent.location.address.street}}<br>
       {{main.selEvent.location.address.zip}} {{main.selEvent.location.address.city}}
     </address>
+    </p>
+
+    <p>{{main.selEvent.attending}} attending</p>
 
     <hr>
 
-    <p>{{main.selEvent.attending}} attending</p>
+    <p ng-bind-html="main.selEvent.description | cut:true:500:' ...'"></p>
+
+    <hr>
 
     <a ui-sref="event({ id: main.selEvent._id })">Read more...</a>
   </div>

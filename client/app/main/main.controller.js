@@ -35,7 +35,7 @@ class MainController {
     var promises = [
       $http.get('/api/importers')
         .then(response => {
-          return this.importers = response.data;
+          this.importers = response.data;
         }),
       $http.get('/api/events')
         .then(response => {
