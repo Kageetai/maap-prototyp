@@ -23,6 +23,7 @@ module.exports = function(config) {
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
       'client/bower_components/angular-simple-logger/dist/angular-simple-logger.js',
       'client/bower_components/angular-google-maps/dist/angular-google-maps.js',
+      'client/bower_components/angular-socialshare/dist/angular-socialshare.min.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',

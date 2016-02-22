@@ -4,8 +4,10 @@
 
   class EventController {
 
-    constructor($http, $stateParams) {
+    constructor($http, $stateParams, $location) {
       this.$http = $http;
+      this.url = $location.absUrl();
+      console.log(this.url);
       this.map = {
         center: {
           latitude: 52.520007,

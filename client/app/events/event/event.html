@@ -40,6 +40,63 @@
               </a>
             </div>
           </div>
+
+          <p><strong>Share</strong></p>
+          <p class="share-buttons btn-group" role="group" aria-label="share">
+            <button type="button" class="btn btn-default"
+                    socialshare
+                    socialshare-provider="twitter"
+                    socialshare-text="{{event.event.name}}"
+                    socialshare-hashtags="maap"
+                    socialshare-url="{{event.url}}"><i class="fa fa-twitter"></i></button>
+            <button type="button" class="btn btn-default"
+                    socialshare
+                    socialshare-provider="facebook"
+                    socialshare-text="{{event.event.name}}"
+                    socialshare-description="{{event.event.description}}"
+                    socialshare-media="{{event.event.pictures[0]}}"
+                    socialshare-url="{{event.url}}"><i class="fa fa-facebook"></i></button>
+            <button type="button" class="btn btn-default"
+                    socialshare
+                    socialshare-provider="google+"
+                    socialshare-text="{{event.event.name}}"
+                    socialshare-media="{{event.event.pictures[0]}}"
+                    socialshare-url="{{event.url}}"><i class="fa fa-google-plus"></i></button>
+            <button type="button" class="btn btn-default"
+                    socialshare
+                    socialshare-provider="linkedin"
+                    socialshare-text="{{event.event.name}}"
+                    socialshare-description="{{event.event.description}}"
+                    socialshare-url="{{event.url}}"><i class="fa fa-linkedin"></i></button>
+            <button type="button" class="btn btn-default"
+                    socialshare
+                    socialshare-provider="xing"
+                    socialshare-text="{{event.event.name}}"
+                    socialshare-media="{{event.event.pictures[0]}}"
+                    socialshare-url="{{event.url}}"><i class="fa fa-xing"></i></button>
+            <button type="button" class="btn btn-default"
+                    socialshare
+                    socialshare-provider="reddit"
+                    socialshare-text="{{event.event.name}}"
+                    socialshare-url="{{event.url}}"><i class="fa fa-reddit"></i></button>
+            <button type="button" class="btn btn-default"
+                    socialshare
+                    socialshare-provider="pinterest"
+                    socialshare-text="{{event.event.name}}"
+                    socialshare-media="{{event.event.pictures[0]}}"
+                    socialshare-url="{{event.url}}"><i class="fa fa-pinterest"></i></button>
+            <button type="button" class="btn btn-default"
+                    socialshare
+                    socialshare-provider="wordpress"
+                    socialshare-text="{{event.event.name}}"
+                    socialshare-media="{{event.event.pictures[0]}}"
+                    socialshare-url="{{event.url}}"><i class="fa fa-wordpress"></i></button>
+            <button type="button" class="btn btn-default"
+                    socialshare
+                    socialshare-provider="hackernews"
+                    socialshare-text="{{event.event.name}}"
+                    socialshare-url="{{event.url}}"><i class="fa fa-hacker-news"></i></button>
+          </p>
         </div>
       </div>
 

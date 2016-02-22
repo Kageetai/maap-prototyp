@@ -10,7 +10,8 @@ angular.module('maapApp', [
   'ui.router',
   'ui.bootstrap',
   'validation.match',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  '720kb.socialshare'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
