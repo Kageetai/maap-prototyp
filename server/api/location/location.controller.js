@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Location from './location.model';
+import Event from '../event/event.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -70,6 +71,15 @@ export function index(req, res) {
 export function show(req, res) {
   Location.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Gets a single Locations events from the DB
+export function showEvents(req, res) {
+  Event.find({ location: req.params.id })
+    .populate('location')
+    .execAsync()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
