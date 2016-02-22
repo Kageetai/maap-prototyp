@@ -61,7 +61,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of Events
 export function index(req, res) {
-  Event.find()
+  Event.find({ start: { $gte: new Date() } })
     .populate('location')
     .execAsync()
     .then(respondWithResult(res))
