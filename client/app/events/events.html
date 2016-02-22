@@ -12,7 +12,7 @@
       <h1>Events <small ng-if="events.events.length">{{events.events.length}}</small><small class="loading" ng-if="events.events.length == 0">loading</small></h1>
 
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="e in events.events | orderBy:sortBy | filter:eventsFilter">
+        <li class="list-group-item" ng-repeat="e in events.events | orderBy:sortBy | filter:eventsFilter" ng-style="{ 'border-left': e.color + ' 1px solid' }">
           <em class="start italic">{{e.start | date:shortDate}}</em> - <a ui-sref="event({ id: e._id })">{{e.name}}</a> <small>{{e.location.name}} {{e.distance | number:0}}m</small>
         </li>
       </ul>
