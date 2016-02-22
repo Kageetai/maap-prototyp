@@ -8,3 +8,34 @@
                    events="main.markersEvents"
                    doCluster="true"></ui-gmap-markers>
 </ui-gmap-google-map>
+
+<div id="selEvent" ng-show="main.selEvent">
+  <button type="button" class="close" aria-label="Close" ng-click="main.selEvent = null"><span aria-hidden="true">&times;</span></button>
+  <div class="selEvent-source" ng-style="{ 'border-color': main.selEvent.color }"></div>
+
+  <a class="selEvent-heading"
+     ng-style="main.selEvent.pictures.length > 0 && {'background-image': 'url('+main.selEvent.pictures[0]+')', 'min-height': '250px', 'line-height': '250px' }"
+     ui-sref="event({ id: main.selEvent._id })">
+    <h2>{{main.selEvent.name}}</h2>
+  </a>
+
+  <div class="selEvent-info">
+    <strong>{{main.selEvent.start | date:fullDate}}</strong>
+
+    <p ng-bind-html="main.selEvent.description | cut:true:500:' ...'"></p>
+
+    <hr>
+
+    <address>
+      <strong>{{main.selEvent.location.name}}</strong><br>
+      {{main.selEvent.location.address.street}}<br>
+      {{main.selEvent.location.address.zip}} {{main.selEvent.location.address.city}}
+    </address>
+
+    <hr>
+
+    <p>{{main.selEvent.attending}} attending</p>
+
+    <a ui-sref="event({ id: main.selEvent._id })">Read more...</a>
+  </div>
+</div>

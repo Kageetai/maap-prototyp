@@ -4,8 +4,9 @@
 
 class MainController {
 
-  constructor($http) {
+  constructor($http, Locator) {
     this.$http = $http;
+    this.locator = Locator;
     this.awesomeThings = [];
     this.events = [];
     this.map = {
@@ -19,6 +20,12 @@ class MainController {
         streetViewControl: false
       }
     };
+
+    this.locator.locate().then((pos) => {
+      this.userCoords = pos;
+      this.map.center.latitude = pos.latitude;
+      this.map.center.longitude = pos.longitude;
+    });
 
     $http.get('assets/gmap-styles.json')
       .then((res) => {
@@ -40,13 +47,14 @@ class MainController {
       this.events.map((event) => {
         event.location.coordinates.latitude = event.location.coordinates.lat;
         event.location.coordinates.longitude = event.location.coordinates.lng;
+        event.color = this.importers.filter((ele) => {
+          return ele.name.toLowerCase() === event.source.toLowerCase();
+        })[0].color;
         event.icon = {
           path: google.maps.SymbolPath.CIRCLE,
           scale: 10,
           strokeWeight: 1,
-          fillColor: this.importers.filter((ele) => {
-            return ele.name.toLowerCase() === event.source.toLowerCase();
-          })[0].color,
+          fillColor: event.color,
           fillOpacity: 1
         };
         return event;
@@ -54,7 +62,8 @@ class MainController {
     });
 
     this.markersEvents = {
-      click: function (gMarker, eventName, model) {
+      click: (gMarker, eventName, model) => {
+        this.selEvent = model;
         console.log(model);
       }
     };

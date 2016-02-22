@@ -30,3 +30,60 @@
   height: ~"calc(100vh -" @navbar-height ~"- 1px)";
   margin-top: -@navbar-margin-bottom;
 }
+
+#selEvent {
+  position: absolute;
+  top: @navbar-height;
+  left: 0;
+  bottom: 0;
+  height: ~"calc(100vh -" @navbar-height ~"- 1px)";
+  width: 25vw;
+  min-width: 320px;
+  background-color: fadeOut(@brand-primary, 10%);
+  color: white;
+  word-wrap: break-word;
+  z-index: 10;
+
+  > .selEvent-source {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border: 15px solid black;
+    border-right-color: transparent !important;
+    border-bottom-color: transparent !important;
+  }
+
+  > button.close {
+    position: absolute;
+    top: @grid-gutter-width / 2;
+    right: @grid-gutter-width / 2;
+    float: none;
+  }
+
+  > .selEvent-heading {
+    display: block;
+    height: auto;
+    width: 100%;
+    background: no-repeat center;
+    background-size: cover;
+
+    > h2 {
+      display: inline-block;
+      vertical-align: bottom;
+      width: 100%;
+      padding: 15px;
+      margin: 0;
+      background-color: rgba(0,0,0,0.5);
+    }
+  }
+
+  > .selEvent-info {
+    padding: @grid-gutter-width / 2;
+  }
+
+  a {
+    color: lighten(@link-color, 50%);
+  }
+}
