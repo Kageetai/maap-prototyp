@@ -24,7 +24,7 @@
 
     <p>
     <address>
-      <strong>{{main.selEvent.location.name}}</strong><br>
+      <a ui-sref="events({ f: main.selEvent.location._id })"><strong>{{main.selEvent.location.name}}</strong></a><br>
       {{main.selEvent.location.address.street}}<br>
       {{main.selEvent.location.address.zip}} {{main.selEvent.location.address.city}}
     </address>
