@@ -70,6 +70,53 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
     },
 
     /**
+     * Add saved Event
+     *
+     * @param  {String}   eventId
+     * @param  {Function} callback    - optional
+     * @return {Promise}
+     */
+    addSavedEvent: function(eventId, callback) {
+      //TODO gets called way to often
+      return User.addSavedEvent({ id: currentUser._id }, {
+        eventId: eventId
+      }, function(user) {
+        currentUser = user;
+        return safeCb(callback)(user);
+      }, function(err) {
+        return safeCb(callback)(err);
+      }).$promise;
+    },
+
+    /**
+     * Remove Friend
+     *
+     * @param  {String}   eventId
+     * @param  {Function} callback    - optional
+     * @return {Promise}
+     */
+    removeSavedEvent: function(eventId, callback) {
+      return User.removeSavedEvent({ id: currentUser._id }, {
+        eventId: eventId
+      }, function(user) {
+        currentUser = user;
+        return safeCb(callback)(user);
+      }, function(err) {
+        return safeCb(callback)(err);
+      }).$promise;
+    },
+
+    /**
+     * Check if user has friend
+     *
+     * @param  {String}   eventId
+     * @return {boolean}
+     */
+    hasSavedEvent: function(eventId) {
+      return currentUser.savedEvents.includes(eventId);
+    },
+
+    /**
      * Change password
      *
      * @param  {String}   oldPassword

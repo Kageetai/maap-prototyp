@@ -12,6 +12,25 @@ function UserResource($resource) {
         controller: 'password'
       }
     },
+    addSavedEvent: {
+      method: 'PUT',
+      params: {
+        controller:'addsavedevent'
+      }
+    },
+    removeSavedEvent: {
+      method: 'PUT',
+      params: {
+        controller:'removesavedevent'
+      }
+    },
+    locations: {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller:'locations'
+      }
+    },
     get: {
       method: 'GET',
       params: {
