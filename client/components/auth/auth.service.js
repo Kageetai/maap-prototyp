@@ -107,7 +107,7 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
     },
 
     /**
-     * Check if user has friend
+     * Check if user has a saved event
      *
      * @param  {String}   eventId
      * @return {boolean}

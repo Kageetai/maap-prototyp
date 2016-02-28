@@ -1,11 +1,22 @@
 'use strict';
 
 class SettingsController {
-  constructor(Auth) {
+  constructor(Auth, User) {
     this.errors = {};
     this.submitted = false;
 
     this.Auth = Auth;
+
+    User.events({ id: Auth.getCurrentUser()._id }, (events) => {
+      this.savedEvents = events;
+    });
+  }
+
+  removeEvent(event) {
+    this.Auth.removeSavedEvent(event._id).then((user) => {
+      this.savedEvents.splice(this.savedEvents.indexOf(event), 1);
+      console.log('Event removed');
+    });
   }
 
   changePassword(form) {

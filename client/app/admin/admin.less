@@ -1,7 +1,7 @@
 .trash { color:rgb(209, 91, 71); }
 
 .user-list {
-	li {
+	> li {
 		display: flex;
 		border: none;
 		border-bottom: 1px lightgray solid;
@@ -12,9 +12,16 @@
 			flex-grow: 1;
 		}
 		.trash {
-			display: flex;
+			display: none;
 			align-items: center;
 			text-decoration: none;
+      cursor: pointer;
 		}
+
+    &:hover {
+      .trash {
+        display: flex;
+      }
+    }
 	}
 }

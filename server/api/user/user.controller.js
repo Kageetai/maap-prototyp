@@ -160,7 +160,7 @@ exports.savedEvents = function (req, res, next) {
 
   User.findById(userId, function (err, user) {
     Event.find({ _id: { $in: user.savedEvents } })
-    .populate('locationcategory')
+    .populate('location')
     .execAsync()
     .then(respondWithResult(res))
     .catch(handleError(res));

@@ -24,11 +24,11 @@ function UserResource($resource) {
         controller:'removesavedevent'
       }
     },
-    locations: {
+    events: {
       method: 'GET',
       isArray: true,
       params: {
-        controller:'locations'
+        controller:'events'
       }
     },
     get: {
