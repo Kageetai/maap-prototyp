@@ -4,12 +4,13 @@
 
 class MainController {
 
-  constructor($http, Auth, Locator) {
+  constructor($scope, $filter, $http, Auth, Locator) {
     this.Auth = Auth;
     this.hasSavedEvent = Auth.hasSavedEvent;
     this.locator = Locator;
     this.awesomeThings = [];
     this.events = [];
+    this.filteredEvents = [];
     this.map = {
       center: {
         latitude: 52.520007,
@@ -26,6 +27,14 @@ class MainController {
       this.userCoords = pos;
       this.map.center.latitude = pos.latitude;
       this.map.center.longitude = pos.longitude;
+    });
+
+    $scope.$watch("searchTerm", (searchTerm) => {
+      this.filteredEvents = $filter("filter")(this.events, searchTerm);
+      console.log(this.filteredEvents.length);
+      if (!this.filteredEvents){
+        return;
+      }
     });
 
     $http.get('assets/gmap-styles.json')
@@ -59,7 +68,8 @@ class MainController {
           fillOpacity: 1
         };
         return event;
-      })
+      });
+      this.filteredEvents = this.events;
     });
 
     this.markersEvents = {

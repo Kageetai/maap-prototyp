@@ -1,13 +1,15 @@
 <navbar></navbar>
 
 <ui-gmap-google-map id="main-map" center='main.map.center' zoom='main.map.zoom' options="main.map.options">
-  <ui-gmap-markers models="main.events"
+  <ui-gmap-markers models="main.filteredEvents"
                    idkey="'_id'"
                    coords="'location.coordinates'"
                    icon="'icon'"
                    events="main.markersEvents"
                    doCluster="true"></ui-gmap-markers>
 </ui-gmap-google-map>
+
+<input id="search" type="text" class="form-control" ng-model="searchTerm" placeholder="search">
 
 <div id="selEvent" ng-show="main.selEvent">
   <button type="button" class="close" aria-label="Close" ng-click="main.selEvent = null"><span aria-hidden="true">&times;</span></button>
