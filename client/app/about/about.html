@@ -1,0 +1,56 @@
+<navbar></navbar>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-8 col-lg-offset-2">
+      <h1>Welcome to Maap</h1>
+
+      <p>This application gives user the opportunity to search for events and other activities. Records will be
+        imported and categorized via connections to excisting social network and portals.
+        Focus is the integration of external sources and extended search, so that users can filter and search the
+        data by different factors, especially current position and by map.
+        This prototype shows the general functionality and will evaluate eventual further development of the
+        project.</p>
+
+      <form name="form" class="form-horizontal" novalidate ng-submit="sendMail(form)">
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted,
+                                            'has-error': form.name.$invalid && vm.submitted }">
+          <label for="name" class="col-sm-2 control-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" placeholder="Name" required ng-model="name">
+            <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
+              A name is required
+            </p>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && vm.submitted,
+                                            'has-error': form.email.$invalid && vm.submitted }">
+          <label for="email" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" placeholder="Email" required ng-model="email">
+            <p class="help-block" ng-show="form.email.$error.email && vm.submitted">
+              Doesn't look like a valid email.
+            </p>
+            <p class="help-block" ng-show="form.email.$error.required && vm.submitted">
+              What's your email address?
+            </p>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.message.$valid && vm.submitted,
+                                            'has-error': form.message.$invalid && vm.submitted }">
+          <label for="message" class="col-sm-2 control-label">Message</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" rows="5" id="message" placeholder="Message" required ng-model="message"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer></footer>
