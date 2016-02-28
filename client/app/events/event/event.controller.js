@@ -51,6 +51,15 @@
       });
     }
 
+    getAddressString(event) {
+      if (event == undefined) return;
+      var a = event.location.address;
+      return (((a.street) ? a.street + ',' : '')
+          + ((a.zip) ? a.zip + ',' : '')
+          + ((a.city) ? a.city + ',' : '')
+          + ((a.country) ? a.country : '')).replace(' ', '+');
+    }
+
     saveEvent(event) {
       this.Auth.addSavedEvent(event._id).then((user) => {
         console.log('Event saved');

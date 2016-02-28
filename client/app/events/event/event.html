@@ -45,6 +45,7 @@
             <a class="btn btn-primary" href="" ng-click="event.saveEvent(event.event)" ng-show="nav.isLoggedIn() && !event.hasSavedEvent(event.event._id)">Save Event</a>
             <a class="btn btn-primary" href="" ng-click="event.removeEvent(event.event)" ng-show="nav.isLoggedIn() && event.hasSavedEvent(event.event._id)">Remove saved Event</a>
             <a class="btn btn-primary" ui-sref="login" ng-hide="nav.isLoggedIn()">(Log in to) Save Event</a>
+            <a ng-href="http://maps.google.com/maps?f=d&daddr={{event.getAddressString(event.event)}}" target="_blank" class="btn btn-primary">Navigate to Event</a>
           </p>
 
           <p><strong>Share</strong></p>
