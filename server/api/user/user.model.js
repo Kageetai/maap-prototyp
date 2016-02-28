@@ -22,7 +22,8 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   google: {},
-  github: {}
+  github: {},
+  savedEvents: [{ type: mongoose.Schema.ObjectId, ref: 'Event' }]
 });
 
 /**

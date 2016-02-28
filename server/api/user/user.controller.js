@@ -1,9 +1,19 @@
 'use strict';
 
 import User from './user.model';
+import Event from '../event/event.model';
 import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+
+function respondWithResult(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function(entity) {
+    if (entity) {
+      res.status(statusCode).json(entity);
+    }
+  };
+}
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -98,6 +108,67 @@ export function changePassword(req, res, next) {
       }
     });
 }
+
+/**
+ * Add a new saved event
+ */
+exports.addSavedEvent = function(req, res, next) {
+  var userId = req.user._id;
+  var eventId = String(req.body.eventId);
+
+  User.findByIdAsync(userId, '-salt -password')
+    .then(user => {
+      if (user.savedEvents.indexOf(eventId) === -1) {
+        user.savedEvents.push(eventId);
+      } else {
+        console.error('User already has this event saved');
+        return res.status(500).send('User already has this event saved').end();
+      }
+      return user.saveAsync()
+        .then(() => {
+          res.json(user);
+        })
+        .catch(validationError(res));
+    })
+    .catch(err => next(err));
+};
+
+/**
+ * Remove a saved event
+ */
+exports.removeSavedEvent = function(req, res, next) {
+  var userId = req.user._id;
+  var eventId = String(req.body.eventId);
+
+  User.findByIdAsync(userId, '-salt -password')
+    .then(user => {
+      user.savedEvents.splice(user.savedEvents.indexOf(eventId), 1);
+      return user.saveAsync()
+        .then(() => {
+          res.json(user);
+        })
+        .catch(validationError(res));
+    })
+    .catch(err => next(err));
+};
+
+/**
+ * Get a users saved events
+ */
+exports.savedEvents = function (req, res, next) {
+  var userId = req.params.id;
+
+  User.findById(userId, function (err, user) {
+    Event.find({ _id: { $in: user.savedEvents } })
+    .populate('locationcategory')
+    .execAsync()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+
+  });
+
+
+};
 
 /**
  * Get my info
