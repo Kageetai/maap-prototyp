@@ -4,8 +4,9 @@
 
   class EventController {
 
-    constructor($http, $stateParams, $location) {
-      this.$http = $http;
+    constructor($http, $stateParams, $location, Auth) {
+      this.Auth = Auth;
+      this.hasSavedEvent = Auth.hasSavedEvent;
       this.url = $location.absUrl();
       this.map = {
         center: {
@@ -47,6 +48,18 @@
         //  fillColor: this.event.color,
         //  fillOpacity: 1
         //};
+      });
+    }
+
+    saveEvent(event) {
+      this.Auth.addSavedEvent(event._id).then((user) => {
+        console.log('Event saved');
+      });
+    }
+
+    removeEvent(event) {
+      this.Auth.removeSavedEvent(event._id).then((user) => {
+        console.log('Event removed');
       });
     }
   }

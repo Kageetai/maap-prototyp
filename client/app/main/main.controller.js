@@ -4,8 +4,9 @@
 
 class MainController {
 
-  constructor($http, Locator) {
-    this.$http = $http;
+  constructor($http, Auth, Locator) {
+    this.Auth = Auth;
+    this.hasSavedEvent = Auth.hasSavedEvent;
     this.locator = Locator;
     this.awesomeThings = [];
     this.events = [];
@@ -69,15 +70,16 @@ class MainController {
     };
   }
 
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/things', { name: this.newThing });
-      this.newThing = '';
-    }
+  saveEvent(event) {
+    this.Auth.addSavedEvent(event._id).then((user) => {
+      console.log('Event saved');
+    });
   }
 
-  deleteThing(thing) {
-    this.$http.delete('/api/things/' + thing._id);
+  removeEvent(event) {
+    this.Auth.removeSavedEvent(event._id).then((user) => {
+      console.log('Event removed');
+    });
   }
 }
 

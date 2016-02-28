@@ -14,7 +14,7 @@
   <div class="selEvent-source" ng-style="{ 'border-color': main.selEvent.color }"></div>
 
   <a class="selEvent-heading"
-     ng-style="main.selEvent.pictures.length > 0 && {'background-image': 'url('+main.selEvent.pictures[0]+')', 'min-height': '250px', 'line-height': '250px' }"
+     ng-style="main.selEvent.pictures.length > 0 && {'background-image': 'url('+main.selEvent.pictures[0]+')', 'min-height': '200px', 'line-height': '200px' }"
      ui-sref="event({ id: main.selEvent._id })">
     <h2>{{main.selEvent.name}}</h2>
   </a>
@@ -38,6 +38,12 @@
 
     <hr>
 
-    <a ui-sref="event({ id: main.selEvent._id })">Read more...</a>
+    <p><a ui-sref="event({ id: main.selEvent._id })">Read more...</a></p>
+
+    <p>
+      <a href="" ng-click="main.saveEvent(main.selEvent)" ng-show="nav.isLoggedIn() && !main.hasSavedEvent(main.selEvent._id)">Save Event</a>
+      <a href="" ng-click="main.removeEvent(main.selEvent)" ng-show="nav.isLoggedIn() && main.hasSavedEvent(main.selEvent._id)">Remove saved Event</a>
+      <a ui-sref="login" ng-hide="nav.isLoggedIn()">(Log in to) Save Event</a>
+    </p>
   </div>
 </div>
