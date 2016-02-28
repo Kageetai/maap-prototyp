@@ -5,7 +5,6 @@
 class EventsController {
 
   constructor($http, $location, Locator) {
-    this.$http = $http;
     this.locator = Locator;
     this.events = [];
     this.eventsFilter = ($location.search().f) ? $location.search().f : null;
