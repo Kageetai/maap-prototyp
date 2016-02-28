@@ -2,10 +2,9 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-8 col-md-offset-2">
       <h1>Sign up</h1>
-    </div>
-    <div class="col-sm-12">
+
       <form class="form" name="form" ng-submit="vm.register(form)" novalidate>
 
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted,
@@ -76,11 +75,8 @@
         </div>
 
         <hr/>
-        <div class="row">
-          <div class="col-sm-4 col-md-3">
-            <oauth-buttons classes="btn-block"></oauth-buttons>
-          </div>
-        </div>
+
+        <oauth-buttons classes=""></oauth-buttons>
       </form>
     </div>
   </div>

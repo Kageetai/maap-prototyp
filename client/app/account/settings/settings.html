@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-8 col-md-offset-2">
       <h2>Your Saved Events</h2>
 
       <ul class="saved-events" ng-if="vm.savedEvents.length > 0">
@@ -13,7 +13,7 @@
       </ul>
       <p ng-if="vm.savedEvents.length == 0">You don't have any saved events. Go find something awesome to do!</p>
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-8 col-md-offset-2">
       <h2>Change Password</h2>
 
       <form class="form" name="form" ng-submit="vm.changePassword(form)" novalidate>
