@@ -69,7 +69,7 @@ var MeetupImport = {
             address: {
               country: (event.venue.country) ? event.venue.country : null,
               city: (event.venue.city) ? event.venue.city : null,
-              street: (event.venue.street) ? event.venue.address_1 : null,
+              street: (event.venue.address_1) ? event.venue.address_1 : null,
               zip: (event.venue.zip) ? event.venue.zip : null
             },
             source: 'meetup',
